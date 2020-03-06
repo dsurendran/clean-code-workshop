@@ -22,4 +22,8 @@ public class Rental {
         return movie.rentalAmount(daysRented);
     }
 
+    int frequentRentalPoints() {
+        return movie.frequentRentalPoints(daysRented);
+    }
+
 }

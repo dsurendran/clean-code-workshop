@@ -45,4 +45,14 @@ public class Movie {
         }
         return rentalAmount;
     }
+
+    boolean isNewReleaseMovie() {
+        return getPriceCode() == NEW_RELEASE;
+    }
+
+    int frequentRentalPoints(int daysRented) {
+        if (isNewReleaseMovie() && daysRented > 1)
+            return 2;
+        return 1;
+    }
 }
