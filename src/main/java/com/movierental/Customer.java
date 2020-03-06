@@ -23,13 +23,9 @@ public class Customer {
         return header() + body() + footer();
     }
 
-
     private String footer() {
-        String result = "";
-        //add footer lines result
-        result += "Amount owed is " + totalAmount() + "\n";
-        result += "You earned " + frequentRenterPoints()
-                + " frequent renter points";
+        String result = "" + ("Amount owed is " + totalAmount() + "\n");
+        result += "You earned " + frequentRenterPoints() + " frequent renter points";
         return result;
     }
 
