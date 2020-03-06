@@ -25,4 +25,24 @@ public class Movie {
         return title;
     }
 
+    double rentalAmount(int daysRented) {
+        double rentalAmount = 0;
+        //determine amounts for each line
+        switch (priceCode) {
+            case REGULAR:
+                rentalAmount += 2;
+                if (daysRented > 2)
+                    rentalAmount += (daysRented - 2) * 1.5;
+                break;
+            case NEW_RELEASE:
+                rentalAmount += daysRented * 3;
+                break;
+            case CHILDRENS:
+                rentalAmount += 1.5;
+                if (daysRented > 3)
+                    rentalAmount += (daysRented - 3) * 1.5;
+                break;
+        }
+        return rentalAmount;
+    }
 }
