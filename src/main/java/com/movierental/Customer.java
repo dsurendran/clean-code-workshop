@@ -20,24 +20,64 @@ public class Customer {
     }
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
-        String result = "Rental Record for " + getName() + "\n";
-        for (Rental rental : rentals) {
-            double rentalAmount = rental.amount();
-            frequentRenterPoints += rental.frequentRentalPoints();
+        return header() + body() + footer();
+    }
 
-            //show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" +
-                    String.valueOf(rentalAmount) + "\n";
-            totalAmount += rentalAmount;
-        }
 
+    private String footer() {
+        String result = "";
         //add footer lines result
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints)
+        result += "Amount owed is " + totalAmount() + "\n";
+        result += "You earned " + frequentRenterPoints()
                 + " frequent renter points";
         return result;
+    }
+
+    private String header() {
+        return "Rental Record for " + getName() + "\n";
+    }
+
+    private String body() {
+        String result = "";
+        for (Rental rental : rentals) {
+            //show figures for this rental
+            result += "\t" + rental.getMovie().getTitle() + "\t" + rental.amount() + "\n";
+        }
+        return result;
+    }
+
+    private double totalAmount() {
+        double totalAmount = 0;
+        for (Rental rental : rentals) {
+            double rentalAmount = rental.amount();
+            totalAmount += rentalAmount;
+        }
+        return totalAmount;
+    }
+
+    private int frequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : rentals) {
+            frequentRenterPoints += rental.frequentRentalPoints();
+        }
+        return frequentRenterPoints;
+    }
+
+
+    public String htmlStatement() {
+        return htmlHeader() + htmlBody() + htmlFooter();
+    }
+
+    private String htmlHeader() {
+        return "header";
+    }
+
+    private String htmlBody() {
+        return "html body";
+    }
+
+    private String htmlFooter() {
+        return "footer";
     }
 
 }
