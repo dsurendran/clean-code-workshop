@@ -4,24 +4,29 @@ import java.util.List;
 
 public class Rentals {
     List<Rental> rentals;
-    double totalAmount;
-    int frequentRenterPoints;
 
-    public Rentals(List<Rental> rentals, double totalAmount, int frequentRenterPoints) {
+    public Rentals(List<Rental> rentals) {
         this.rentals = rentals;
-        this.totalAmount = totalAmount;
-        this.frequentRenterPoints = frequentRenterPoints;
     }
 
     public List<Rental> getRentals() {
         return rentals;
     }
 
-    public double getTotalAmount() {
+    public double totalAmount() {
+        double totalAmount = 0;
+        for (Rental rental : rentals) {
+            double rentalAmount = rental.amount();
+            totalAmount += rentalAmount;
+        }
         return totalAmount;
     }
 
-    public int getFrequentRenterPoints() {
+    public int frequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : rentals) {
+            frequentRenterPoints += rental.frequentRentalPoints();
+        }
         return frequentRenterPoints;
     }
 }

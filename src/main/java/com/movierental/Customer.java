@@ -29,51 +29,24 @@ public class Customer {
         for (Rental rental : rentals) {
             frequentRenterPoints += rental.frequentRentalPoints();
         }
-        return new TextStatement(new Rentals(rentals, totalAmount, frequentRenterPoints), name).statement();
+        return new TextStatement(new Rentals(rentals), name).statement();
     }
 
-    private double totalAmount() {
+
+    public String htmlStatement() {
         double totalAmount = 0;
         for (Rental rental : rentals) {
             double rentalAmount = rental.amount();
             totalAmount += rentalAmount;
         }
-        return totalAmount;
-    }
-
-    private int frequentRenterPoints() {
         int frequentRenterPoints = 0;
         for (Rental rental : rentals) {
             frequentRenterPoints += rental.frequentRentalPoints();
         }
-        return frequentRenterPoints;
+        return new HtmlStatement(new Rentals(rentals), name).statement();
     }
 
 
-    public String htmlStatement() {
-        return htmlHeader() + htmlBody() + htmlFooter();
-    }
-
-    private String htmlHeader() {
-        return "<h1>Rental Record for <b>" + name + "</b></h1><br/>";
-    }
-
-    private String htmlBody() {
-        String result = "";
-        for (Rental rental : rentals) {
-            //show figures for this rental
-            result += " " + rental.getMovie().getTitle() + " <b>" + rental.amount() + "</b><br/>";
-        }
-        return result;
-    }
-
-    private String htmlFooter() {
-        String result = "";
-        result += "Amount owed is <b>" + totalAmount() + "</b><br/>";
-        result += "You earned <b>" + frequentRenterPoints()
-                + "</b> frequent renter points<br/>";
-        return result;
-    }
 
 }
 
