@@ -6,19 +6,32 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
+    private PriceCode priceCode;
 
     public Movie(String title, int priceCode) {
         this.title = title;
-        this.priceCode = priceCode;
+        this.priceCode = priceCodeFor(priceCode);
+    }
+
+    private PriceCode priceCodeFor(int priceCode) {
+        switch (priceCode){
+            case REGULAR:
+                return new RegularPriceCode();
+            case CHILDRENS:
+                return new ChildrenPriceCode();
+            case NEW_RELEASE:
+                return new NewReleasePriceCode();
+            default:
+                return new DefaultPriceCode(priceCode);
+        }
     }
 
     public int getPriceCode() {
-        return priceCode;
+        return priceCode.value();
     }
 
     public void setPriceCode(int arg) {
-        priceCode = arg;
+        priceCode = priceCodeFor(arg);
     }
 
     public String getTitle() {
@@ -26,24 +39,7 @@ public class Movie {
     }
 
     double rentalAmount(int daysRented) {
-        double rentalAmount = 0;
-        //determine amounts for each line
-        switch (priceCode) {
-            case REGULAR:
-                rentalAmount += 2;
-                if (daysRented > 2)
-                    rentalAmount += (daysRented - 2) * 1.5;
-                break;
-            case NEW_RELEASE:
-                rentalAmount += daysRented * 3;
-                break;
-            case CHILDRENS:
-                rentalAmount += 1.5;
-                if (daysRented > 3)
-                    rentalAmount += (daysRented - 3) * 1.5;
-                break;
-        }
-        return rentalAmount;
+        return priceCode.rentalAmount(daysRented);
     }
 
     boolean isNewReleaseMovie() {
