@@ -65,15 +65,24 @@ public class Customer {
     }
 
     private String htmlHeader() {
-        return "header";
+        return "<h1>Rental Record for <b>" + name + "</b></h1><br/>";
     }
 
     private String htmlBody() {
-        return "html body";
+        String result = "";
+        for (Rental rental : rentals) {
+            //show figures for this rental
+            result += " " + rental.getMovie().getTitle() + " <b>" + rental.amount() + "</b><br/>";
+        }
+        return result;
     }
 
     private String htmlFooter() {
-        return "footer";
+        String result = "";
+        result += "Amount owed is <b>" + totalAmount() + "</b><br/>";
+        result += "You earned <b>" + frequentRenterPoints()
+                + "</b> frequent renter points<br/>";
+        return result;
     }
 
 }

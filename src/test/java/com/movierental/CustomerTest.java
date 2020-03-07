@@ -23,4 +23,22 @@ public class CustomerTest {
                 "You earned 4 frequent renter points", customer.statement());
     }
 
+    @Test
+    public void shouldPrintHtmlStatement(){
+        Customer customer = new Customer("John");
+        Rental regularRental = new Rental(new Movie("Regular", Movie.REGULAR), 3);
+        Rental newReleaseRental = new Rental(new Movie("NewRelease", Movie.NEW_RELEASE), 3);
+        Rental childrenRental = new Rental(new Movie("Children", Movie.REGULAR), 3);
+        customer.addRental(regularRental);
+        customer.addRental(newReleaseRental);
+        customer.addRental(childrenRental);
+        Assert.assertEquals("<h1>Rental Record for <b>John</b></h1><br/> " +
+                "Regular <b>3.5</b><br/> " +
+                "NewRelease <b>9.0</b><br/> " +
+                "Children <b>3.5</b><br/>" +
+                "Amount owed is <b>16.0</b><br/>" +
+                "You earned <b>4</b> frequent renter points<br/>", customer.htmlStatement());
+
+    }
+
 }
