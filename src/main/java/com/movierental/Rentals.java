@@ -1,21 +1,12 @@
 package com.movierental;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Rentals {
-    List<Rental> rentals;
-
-    public Rentals(List<Rental> rentals) {
-        this.rentals = rentals;
-    }
-
-    public List<Rental> getRentals() {
-        return rentals;
-    }
+public class Rentals extends ArrayList<Rental> {
 
     public double totalAmount() {
         double totalAmount = 0;
-        for (Rental rental : rentals) {
+        for (Rental rental : this) {
             double rentalAmount = rental.amount();
             totalAmount += rentalAmount;
         }
@@ -24,9 +15,10 @@ public class Rentals {
 
     public int frequentRenterPoints() {
         int frequentRenterPoints = 0;
-        for (Rental rental : rentals) {
+        for (Rental rental : this) {
             frequentRenterPoints += rental.frequentRentalPoints();
         }
         return frequentRenterPoints;
     }
+
 }

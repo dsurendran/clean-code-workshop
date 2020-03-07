@@ -20,7 +20,7 @@ class TextStatement {
 
     private String body() {
         String result = "";
-        for (Rental rental : rentals.getRentals()) {
+        for (Rental rental : rentals) {
             //show figures for this rental
             result += "\t" + rental.getMovie().getTitle() + "\t" + rental.amount() + "\n";
         }

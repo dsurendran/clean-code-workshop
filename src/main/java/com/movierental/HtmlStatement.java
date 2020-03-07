@@ -20,7 +20,7 @@ public class HtmlStatement {
 
     private String htmlBody() {
         String result = "";
-        for (Rental rental : rentals.getRentals()) {
+        for (Rental rental : rentals) {
 //            show figures for this rental
             result += " " + rental.getMovie().getTitle() + " <b>" + rental.amount() + "</b><br/>";
         }
